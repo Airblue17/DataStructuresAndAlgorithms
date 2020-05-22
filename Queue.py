@@ -17,7 +17,9 @@ class Queue(object):
     
     def peek(self):
         return self.storage[0]
-        
+      
+    def print(self):
+        return self.storage
 
 # Initialization  
 q1 = Queue(10)
@@ -33,3 +35,6 @@ q1.enqueue(20)
 print(q1.dequeue()) # Should be 10
 
 print(q1.peek()) # Should now be 20
+
+# Print
+print(q1.print())

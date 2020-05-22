@@ -32,8 +32,16 @@ class LinkedList(object):
         else:
             return ValueError
             
-            
-            
+    def print(self):
+        if self.top:
+            print("Stack:")
+            current = self.top
+            while(current):
+                print(current.value)
+                current = current.next
+        else:
+            print("stack empty")
+        
 class Stack(object):
     def __init__(self, LL = None):
         self.LL = LL
@@ -43,6 +51,9 @@ class Stack(object):
         
     def pop(self):
         return self.LL.delete_top()
+    
+    def print_stack(self):
+         self.LL.print()
         
 e1 = Element(10)
 e2 = Element(20)
@@ -63,4 +74,8 @@ print(stk.LL.top.next.value) # Should be 10
 
 print(stk.pop().value) # Should be 20
 
-print(stk.LL.top.value) # Should be 10  
+print(stk.LL.top.value) # Should be 10 
+
+# Print
+print()
+stk.print_stack()

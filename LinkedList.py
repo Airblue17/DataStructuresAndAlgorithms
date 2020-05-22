@@ -73,6 +73,30 @@ class LinkedList(object):
                     
                 return deleted
             
+    def print(self):
+        if self.head:
+            print("LinkedList:")
+            current = self.head
+            while(current):
+                print(current.value)
+                current = current.next
+        else:
+            return ValueError
+        
+    def get_position(self, position):
+        current = self.head
+        
+        if position < 1:
+            return ValueError
+        else:
+            counter = 1
+            while(counter < position and current):
+                current = current.next
+                counter += 1
+            if(counter == position):
+                return current
+            else:
+                return ValueError
 
 e1 = Element(10)
 e2 = Element(20)
@@ -97,5 +121,15 @@ e4 = Element(40)
 LL.append(e4)
 print(LL.delete(2).value) # Should be 20
 print(LL.head.next.value) # Should be 40
+
+# Print
+print()
+LL.print()
+print()
+
+# Getting the 2nd Node value
+print(LL.get_position(2).value) # Should be 40
+LL.insert(e1, 2)
+print(LL.get_position(2).value) # Should be now 10
   
             
