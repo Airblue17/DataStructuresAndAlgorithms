@@ -35,13 +35,17 @@ class LinkedList(object):
                 previous = current
                 current = current.next
                 counter += 1
-            if previous :
-                previous.next = new_element
-                new_element.next = current
+                
+            if counter < position:
+                return ValueError
             else:
-                new_head = new_element
-                new_head.next = self.head
-                self.head = new_head
+                if previous :
+                    previous.next = new_element
+                    new_element.next = current
+                else:
+                    new_head = new_element
+                    new_head.next = self.head
+                    self.head = new_head
     
     def delete(self, position):
         current = self.head
@@ -65,6 +69,7 @@ class LinkedList(object):
                 else:
                     deleted = self.head
                     self.head = self.head.next
+                    deleted.next = None
                     
                 return deleted
             
