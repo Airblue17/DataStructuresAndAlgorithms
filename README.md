@@ -1,2 +1,2 @@
-# PythonDataStructures
-Some of the data structures I implemented in Python for practice
+# Python Data Structures & Algorithms
+Some of the data structures & algorithms I implemented in Python for practice
