@@ -76,11 +76,11 @@ class BinaryTree(object):
             current.right.visited =  False
           
         traversal = []
-        traversal.append(current.value)
+        traversal.append(str(current.value))
         while nodes_list:
             
-            if current.visited and current.value not in traversal:
-                traversal.append(current.value)
+            if current.visited and str(current.value) not in traversal:
+                traversal.append(str(current.value))
                 
             
             if current.left and not current.left.visited: # If Left Child exists and not visited
@@ -107,8 +107,6 @@ class BinaryTree(object):
                 nodes_list.pop() 
                 if len(nodes_list) != 0:
                     current = nodes_list[-1]
-                    
-        traversal = [str(node) for node in traversal]
         
         return '-'.join(traversal)
     
@@ -123,14 +121,13 @@ class BinaryTree(object):
     
     def preorder_print(self, start, traversal):
         if start:
-            traversal.append(start.value)
+            traversal.append(str(start.value))
             traversal = self.preorder_print(start.left, traversal)
             traversal = self.preorder_print(start.right, traversal)
             
         if start != self.root:
             return traversal
         else:
-            traversal = [str(node) for node in traversal]
             return '-'.join(traversal)
                 
             
