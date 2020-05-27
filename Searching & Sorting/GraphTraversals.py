@@ -107,6 +107,34 @@ class Graph(object):
                 current = nodeStack[-1]
                 
         return ret_list
+    
+    def breadthFirstSearch(self, startNodeValue):
+        self._clearVisited()
+        start = self.findStartNode(startNodeValue)
+        
+        ret_list = []
+        ret_list.append(startNodeValue)
+        start.visited = True
+        
+        current = start
+        
+        nodesQueue = []
+        i = 1
+        
+        while i==1 or nodesQueue:
+            i=0
+            # Outbound edges to nodes that haven't been visited
+            out_edges = [edge for edge in current.edges if current.value != edge.node_to and edge.node_to.visited == False]
+            for edge in out_edges:
+                ret_list.append(edge.node_to.value)
+                edge.node_to.visited = True
+                nodesQueue.append(edge.node_to)
+                
+            if nodesQueue:
+                current = nodesQueue.pop(0)
+                
+        return ret_list
+        
             
  
 graph = Graph()
@@ -134,6 +162,12 @@ graph.insert_edge(6, 3, 55)
         
 print("\nRecursive Depth First Search")
 print(graph.dfsRecursive(1))
-        
+
 print("\nIterative Depth First Search")
 print(graph.dfsIterative(1))
+    
+print("\nBreadth First Search")
+print(graph.breadthFirstSearch(1))
+
+print("\nDFS with 4 as start value")
+print(graph.dfsRecursive(4))
