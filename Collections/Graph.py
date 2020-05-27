@@ -5,6 +5,8 @@ Created on Tue May 26 20:18:29 2020
 @author: nitin
 """
 
+# Directed Graph
+# Methods for Edge List, Adjacency List, and Adjacency Matrix
 class Node(object):
     def __init__(self, value):
         self.value = value
