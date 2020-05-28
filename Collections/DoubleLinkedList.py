@@ -59,22 +59,43 @@ class DoubleLinkedList(object):
             new_element.next = current
             current.prev = new_element
             
+    def _clearNodeRef(self, element):
+        element.next = None
+        element.prev = None
+        
     def delete_at(self, position):
         prev, current = self.get_positon(position)
         
         if not prev:
             deleted = self.head
             self.head = self.head.next
-            self.prev = None
-            deleted.next = None
+            self.head.prev = None
+            self._clearNodeRef(deleted)
         else:
             deleted = current
             prev.next = current.next
             if current.next:
                 current.next.prev = prev
-            deleted.prev = None
-            deleted.next = None
+            self._clearNodeRef(deleted)
         return deleted
+     
+    def reverse(self):
+        current = self.head
+        
+        while current.next:
+            current = current.next
+            
+        newHead = current
+        
+        prev = current.prev
+        
+        while prev:
+            prev = current.prev
+            current.next, current.prev = current.prev, current.next
+            current = prev
+            
+        newHead.prev = None
+        self.head = newHead
             
     def print_ll(self):
         current = self.head
@@ -82,6 +103,7 @@ class DoubleLinkedList(object):
         while current:
             print(current.value)
             current = current.next
+            
             
         
 e1 = Element(1)
@@ -109,4 +131,17 @@ print("\nDeleted", DLL.delete_at(4).value)
 DLL.print_ll()
 
 print("\nDeleted", DLL.delete_at(2).value)
+DLL.print_ll()
+
+print("\nReversing the Linked List")
+DLL.reverse()
+print("\n Reversed:")
+DLL.print_ll()
+
+DLL.insert_at(2, e1)
+print("\nInserted element with value 1 into position 1")
+
+
+print("\nBack to Original Sequence:")
+DLL.reverse()
 DLL.print_ll()
