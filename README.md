@@ -4,6 +4,8 @@ Some of the data structures & algorithms I implemented in Python for practice
 # Data Structures
 -> LinkedList
 
+-> Double LinkedList
+
 -> Stack
 
 -> Queue
