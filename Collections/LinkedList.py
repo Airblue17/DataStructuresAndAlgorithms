@@ -25,53 +25,26 @@ class LinkedList(object):
             self.head = new_element
             
     def insert(self, new_element, position):
-        current = self.head
-        if position < 1:
-            return ValueError
-        else:
-            counter = 1
-            previous = None
-            while(counter < position and current.next):
-                previous = current
-                current = current.next
-                counter += 1
-                
-            if counter < position:
-                return ValueError
-            else:
-                if previous :
-                    previous.next = new_element
-                    new_element.next = current
-                else:
-                    new_head = new_element
-                    new_head.next = self.head
-                    self.head = new_head
+        prev, current = self.get_position(position)
+        if not prev:
+            new_element.next = self.head
+            self.head = new_element
+            return
+        prev.next = new_element
+        new_element.next = current
     
     def delete(self, position):
-        current = self.head
-        if position < 1 :
-            return ValueError
+        prev, current = self.get_position(position)
+        if not prev:
+            deleted = self.head
+            self.head = self.head.next
+            deleted.next = None
         else:
-            previous = None
-            counter = 1
-            while(counter < position and current.next):
-                previous = current
-                current = current.next
-                counter += 1
-            
-            if counter < position:
-                return ValueError
-            else:
-                if previous:
-                    deleted = current
-                    previous.next = current.next
-                    deleted.next = None
-                else:
-                    deleted = self.head
-                    self.head = self.head.next
-                    deleted.next = None
+            deleted = current
+            prev.next = current.next
+            deleted.next = None
                     
-                return deleted
+        return deleted
             
     def print(self):
         if self.head:
@@ -89,12 +62,14 @@ class LinkedList(object):
         if position < 1:
             return ValueError
         else:
+            prev = None
             counter = 1
             while(counter < position and current):
+                prev = current
                 current = current.next
                 counter += 1
-            if(counter == position):
-                return current
+            if counter == position :
+                return prev, current
             else:
                 return ValueError
             
@@ -145,18 +120,23 @@ print(LL.delete(2).value) # Should be 20
 print(LL.head.next.value) # Should be 40
 
 # Print
-print()
+print("\nPrinting the LL")
 LL.print()
 print()
 
 # Getting the 2nd Node value
-print(LL.get_position(2).value) # Should be 40
+_, sndNodeVal = LL.get_position(2)
+print("Node value at second position:", sndNodeVal.value) # Should be 40
 LL.insert(e1, 2)
-print(LL.get_position(2).value) # Should be now 10
+print("Inserted 10 in 2nd positon")
+_, sndNodeVal = LL.get_position(2)
+print("Node value at second position:", sndNodeVal.value) # Should be now 10
 
-LL.print()
 # Reverse
 print("\nReversing a linked list")
+print("Original Sequence")
+LL.print()
+print("\nReversed")
 LL.reverse()
 LL.print()
 
