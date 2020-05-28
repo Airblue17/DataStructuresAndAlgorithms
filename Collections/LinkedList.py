@@ -97,7 +97,29 @@ class LinkedList(object):
                 return current
             else:
                 return ValueError
-
+            
+    def reverse(self):
+        current = self.head
+        current.prev = None
+        
+        while current.next:
+            current.next.prev = current
+            current = current.next
+        
+        newHead = current
+        
+        while current.prev:
+            current.next = current.prev
+            current = current.prev
+        
+        self.head.next = None
+        self.head = newHead
+        
+            
+            
+        
+        
+        
 e1 = Element(10)
 e2 = Element(20)
 e3 = Element(30)
@@ -131,5 +153,17 @@ print()
 print(LL.get_position(2).value) # Should be 40
 LL.insert(e1, 2)
 print(LL.get_position(2).value) # Should be now 10
+
+LL.print()
+# Reverse
+print("\nReversing a linked list")
+LL.reverse()
+LL.print()
+
+print("\nBack to original sequence")
+LL.reverse()
+LL.print()
+
+
   
             
