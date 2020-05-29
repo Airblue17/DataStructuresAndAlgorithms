@@ -24,10 +24,7 @@ class BinaryTree(object):
         current.visited = True
         nodes_list.append(current)
         
-        if current.left:
-            current.left.visited = False
-        if current.right:
-            current.right.visited =  False
+        self._clearChildVisit(current) # Set Left and right child visit status to False
             
         while nodes_list:
             current.visited = True
@@ -39,20 +36,12 @@ class BinaryTree(object):
                 current = current.left
                 nodes_list.append(current)
                 
-                if current.left:
-                    current.left.visited = False
-                    
-                if current.right:
-                    current.right.visited = False
+                self._clearChildVisit(current)
             elif current.right and not current.right.visited: # If right child exists and not visited
                 current = current.right
                 nodes_list.append(current)
                 
-                if current.left:
-                    current.left.visited = False
-                    
-                if current.right:
-                    current.right.visited = False
+                self._clearChildVisit(current)
             else: # Either leaf node or all childs visited
                 nodes_list.pop() 
                 if len(nodes_list) != 0:
@@ -60,7 +49,12 @@ class BinaryTree(object):
                 
         return False
     
-    
+    def _clearChildVisit(self, node):
+        if node.left:
+            node.left.visited = False
+        if node.right:
+            node.right.visited = False
+            
     def print_tree(self):
         # Pre-Order Search
         # Worst Case: O(n)
@@ -70,39 +64,25 @@ class BinaryTree(object):
         current.visited = True
         nodes_list.append(current)
         
-        if current.left:
-            current.left.visited = False
-        if current.right:
-            current.right.visited =  False
+        self._clearChildVisit(current) # Set Left and right child visit status to False
           
         traversal = []
         traversal.append(str(current.value))
         while nodes_list:
             
-            if current.visited and str(current.value) not in traversal:
-                traversal.append(str(current.value))
-                
-            
             if current.left and not current.left.visited: # If Left Child exists and not visited
                 current = current.left
                 nodes_list.append(current)
                 current.visited = True
+                traversal.append(str(current.value))
+                self._clearChildVisit(current)
                 
-                if current.left:
-                    current.left.visited = False
-                    
-                if current.right:
-                    current.right.visited = False
             elif current.right and not current.right.visited: # If right child exists and not visited
                 current = current.right
                 nodes_list.append(current)
                 current.visited = True
-                
-                if current.left:
-                    current.left.visited = False
-                    
-                if current.right:
-                    current.right.visited = False
+                traversal.append(str(current.value))
+                self._clearChildVisit(current)
             else: # Either leaf node or all childs visited
                 nodes_list.pop() 
                 if len(nodes_list) != 0:
