@@ -28,4 +28,6 @@ Some of the data structures & algorithms I implemented in Python for practice
 
 -> Quick Sort
 
--> Graph Traversal
+-> Depth First Search
+
+-> Breadth First Search
