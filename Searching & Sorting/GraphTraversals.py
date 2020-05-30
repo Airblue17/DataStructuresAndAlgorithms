@@ -134,8 +134,50 @@ class Graph(object):
                 current = nodesQueue.pop(0)
                 
         return ret_list
+
+    
+    def dist_init(self, start):
+        dist = {}
+        dist[start.value] = 0
         
+        nodes_queue = []
+        nodes_queue.append(start)
+        for node in self.nodes:
+            if node.value != start.value:
+                dist[node.value] = float('inf')
+                nodes_queue.append(node)
+                
+        return dist, nodes_queue
+    
+    def findMinDistNode(self, nodes, dist):
+        min = float('inf')
+        min_node = None
+        for node in nodes:
+            if dist[node.value] < min:
+                min = dist[node.value]
+                min_node = node
+                
+        return min_node
+    
+    def shortestPath(self, startNodeValue):
+        start = self.findStartNode(startNodeValue)
+        dist, nodes_queue = self.dist_init(start)
+        
+        while nodes_queue:
+            current = self.findMinDistNode(nodes_queue, dist)
+            nodes_queue.remove(current)
             
+            out_edges = [e for e in current.edges if e.node_to.value != current.value and e not in nodes_queue]
+            
+            for edge in out_edges:
+                alt_dist = dist[current.value] + edge.value
+                if alt_dist < dist[edge.node_to.value]:
+                    dist[edge.node_to.value] = alt_dist
+                    
+        return dist
+            
+        
+        
  
 graph = Graph()
 
@@ -171,3 +213,6 @@ print(graph.breadthFirstSearch(1))
 
 print("\nDFS with 4 as start value")
 print(graph.dfsRecursive(4))
+
+print("\nDjikstra's Algorithm")
+print(graph.shortestPath(1))
