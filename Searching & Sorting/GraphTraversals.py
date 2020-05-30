@@ -110,30 +110,29 @@ class Graph(object):
     
     def breadthFirstSearch(self, startNodeValue):
         self._clearVisited()
-        start = self.findStartNode(startNodeValue)
-        
+        current = self.findStartNode(startNodeValue)
         ret_list = []
-        ret_list.append(startNodeValue)
-        start.visited = True
         
-        current = start
+        nodes_queue = []
+        def enqueue(queue, node):
+            node.visited = True
+            queue.append(node)
+            
+        enqueue(nodes_queue, current)
         
-        nodesQueue = []
-        i = 1
+        def unvisited_outgoing_edge(node, edge):
+            return ((edge.node_from.value == node.value) and (not edge.node_to.visited))
         
-        while i==1 or nodesQueue:
-            i=0
-            # Outbound edges to nodes that haven't been visited
-            out_edges = [edge for edge in current.edges if current.value != edge.node_to and edge.node_to.visited == False]
-            for edge in out_edges:
-                ret_list.append(edge.node_to.value)
-                edge.node_to.visited = True
-                nodesQueue.append(edge.node_to)
-                
-            if nodesQueue:
-                current = nodesQueue.pop(0)
-                
+        while nodes_queue:
+            current = nodes_queue.pop(0)
+            ret_list.append(current.value)
+            
+            for edge in current.edges:
+                if unvisited_outgoing_edge(current, edge):
+                    enqueue(nodes_queue, edge.node_to)
+                    
         return ret_list
+        
 
     
     def dist_init(self, start):
