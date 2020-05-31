@@ -31,3 +31,7 @@ Some of the data structures & algorithms I implemented in Python for practice
 -> Depth First Search
 
 -> Breadth First Search
+
+-> Shortest Path for Weighted Graph (Dijkstra's Algorithm)
+
+-> Shortest Path for Unweighted Graph (BFS)
