@@ -4,7 +4,6 @@ Created on Sat May 23 04:46:51 2020
 
 @author: nitin
 """
-
 arr = [21,4,1,3,9,20,25,6,21,14]
 
 
@@ -25,9 +24,7 @@ def partition(arr, begin, end):
     return pivotIdx
 
 def quickSort(arr, begin, end):
-    if begin>=end:
-        return
-    else:
+    if begin<=end:
         pivotIdx = partition(arr, begin, end)
         quickSort(arr, begin, pivotIdx-1)
         quickSort(arr, pivotIdx+1, end)
