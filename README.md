@@ -35,3 +35,7 @@ Some of the data structures & algorithms I implemented in Python for practice
 -> Shortest Path for Weighted Graph (Dijkstra's Algorithm)
 
 -> Shortest Path for Unweighted Graph (BFS)
+
+# Problems
+
+-> 0-1 Knapsack
