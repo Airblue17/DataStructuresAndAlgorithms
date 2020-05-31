@@ -39,3 +39,5 @@ Some of the data structures & algorithms I implemented in Python for practice
 # Problems
 
 -> 0-1 Knapsack
+
+-> Kth Smallest Element in an Unsorted Array
