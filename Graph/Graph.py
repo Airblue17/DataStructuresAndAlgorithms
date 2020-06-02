@@ -11,6 +11,7 @@ class Node(object):
     def __init__(self, value):
         self.value = value
         self.edges = []
+        visited = False
         
 class Edge(object):
     def __init__(self, node_from, node_to, value):
@@ -91,15 +92,51 @@ class Graph(object):
         adj_matrix = [adj_matrix[i:i+num_nodes] for i in range(0, num_nodes**2, num_nodes)]
             
         return adj_matrix
+  
+    def _clearVisited(self):
+        for node in self.nodes:
+            node.visited = False
+            
+    def findNode(self, nodeValue):
+        for node in self.nodes:
+            if nodeValue == node.value:
+                return node
+        return None
+    
+    def dfsHelper(self, start):
+        # Outgoing Edges Only
+        start.visited = True
+        out_edges = [e for e in start.edges if e.node_to.value != start.value]
+        for edge in out_edges:
+            if not edge.node_to.visited:
+                edge.node_to.parent = start
+                edge.node_to.ancestor = start.ancestor.copy()
+                edge.node_to.ancestor.append(start.value)
+                if self.dfsHelper(edge.node_to):
+                    return True
+            else:
+                if edge.node_to.value in start.ancestor:
+                    return True
+                
+        return False
+            
+    def IsCyclic(self, startNodeValue):
+        self._clearVisited()
+        start  = self.findNode(startNodeValue)
+        start.ancestor = []
+        start.parent = None
+        return self.dfsHelper(start)
+        
+        
     
     
 graph = Graph()
 
 graph.insert_edge(1, 2, 10)
-graph.insert_edge(1, 3, 20)
-graph.insert_edge(1, 4, 30)
-graph.insert_edge(2, 3, 40)
-graph.insert_edge(4, 5, 50)
+graph.insert_edge(2, 3, 20)
+graph.insert_edge(3, 4, 30)
+graph.insert_edge(1, 5, 40)
+graph.insert_edge(4, 3, 20)
 
 print("\nEdge List:")
 print(graph.getEdgeList())
@@ -109,4 +146,7 @@ print(graph.getAdjacencyList())
 
 print("\nAdjacency Matrix:")
 print(graph.getAdjacencyMatrix())
+
+print("\nIs the graph cyclic?")
+print(graph.IsCyclic(1))
                 
