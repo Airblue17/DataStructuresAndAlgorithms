@@ -101,15 +101,51 @@ class BinaryTree(object):
     
     def preorder_print(self, start, traversal):
         if start:
-            traversal.append(str(start.value))
+            traversal.append(start.value)
             traversal = self.preorder_print(start.left, traversal)
             traversal = self.preorder_print(start.right, traversal)
             
-        if start != self.root:
-            return traversal
-        else:
-            return '-'.join(traversal)
+        return traversal
                 
+    def inorder_print(self, start, traversal):
+        if start:
+            if start.left:
+                traversal = self.inorder_print(start.left, traversal)
+            traversal.append(start.value)
+            if start.right:
+                traversal = self.inorder_print(start.right, traversal) 
+            
+        return traversal
+    
+    def postorder_print(self, start, traversal):
+        if start:
+            if start.left:
+                traversal = self.inorder_print(start.left, traversal)
+            if start.right:
+                traversal = self.inorder_print(start.right, traversal) 
+            traversal.append(start.value)
+            
+        return traversal
+    
+    def bfs(self, start):
+        ret_list = [start.value]
+        
+        nodes_queue = [start]
+        current = start
+        while nodes_queue:
+            if current.left:
+                nodes_queue.append(current.left)
+                ret_list.append(current.left.value)
+            if current.right:
+                nodes_queue.append(current.right)
+                ret_list.append(current.right.value)
+            nodes_queue.pop(0)
+            if nodes_queue:
+                current = nodes_queue[0]
+                
+        return ret_list
+                
+        
             
             
         
@@ -138,4 +174,16 @@ print(tree.preorder_search(tree.root,10)) # Should be False
 
 # Recurvsive Print
 traversal = []
+print("\nPre-order Traversal")
 print(tree.preorder_print(tree.root, traversal))
+
+traversal = []
+print("\nIn-order Traversal")
+print(tree.inorder_print(tree.root, traversal))
+
+traversal = []
+print("\nPost-order Traversal")
+print(tree.postorder_print(tree.root, traversal))
+
+print("\nBFS")
+print(tree.bfs(tree.root))
