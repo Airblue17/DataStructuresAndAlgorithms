@@ -11,7 +11,7 @@ class Node(object):
     def __init__(self, value):
         self.value = value
         self.edges = []
-        visited = False
+        self.visited = False
         
 class Edge(object):
     def __init__(self, node_from, node_to, value):
@@ -63,13 +63,15 @@ class Graph(object):
     
     def getAdjacencyList(self):
         # For each node and corresponding outbound edge, returns (To Node, Edge Value)
-        adj_list = []
+        adj_list = {}
         
         for node in self.nodes:
+            if node.value not in adj_list:
+                adj_list[node.value] = []
             out_edges = [edge for edge in self.edges if node.value != edge.node_to.value and node.value == edge.node_from.value]
-            adj_list.append([(edge.node_to.value, edge.value) for edge in out_edges])
+            adj_list[node.value].extend([(edge.node_to.value, edge.value) for edge in out_edges])
             
-        adj_list = [node_adj_list if node_adj_list else None for node_adj_list in adj_list]
+        #adj_list = [node_adj_list if node_adj_list else None for node_adj_list in adj_list]
             
         return adj_list
     
@@ -126,18 +128,48 @@ class Graph(object):
         start.ancestor = []
         start.parent = None
         return self.dfsHelper(start)
+    
+    def dfs(self, start, stack):
+        if not start.visited:
+            start.visited = True
+            out_edges = [e for e in start.edges if e.node_to.value != start.value]
+            for e in out_edges:
+                if not e.node_to.visited:
+                    self.dfs(e.node_to, stack)
+            stack.append(start.value)
+        
+    def topological_sort(self):
+        self._clearVisited()
+        node_stack = []
+        for node in self.nodes:
+            self.dfs(node, node_stack)
+        node_stack.reverse()
+        return node_stack
         
         
     
     
 graph = Graph()
-
+'''
 graph.insert_edge(1, 2, 10)
 graph.insert_edge(2, 3, 20)
 graph.insert_edge(3, 4, 30)
 graph.insert_edge(1, 5, 40)
 graph.insert_edge(4, 3, 20)
+'''
 
+graph.insert_edge(0, 1, 10)
+graph.insert_edge(0, 3, 10)
+graph.insert_edge(1, 2, 20)
+graph.insert_edge(1, 3, 20)
+
+graph.insert_edge(2, 5, 10)
+graph.insert_edge(2, 4, 20)
+graph.insert_edge(2, 3, 20)
+
+graph.insert_edge(3, 4, 30)
+graph.insert_edge(3, 5, 40)
+graph.insert_edge(4, 5, 20)
 print("\nEdge List:")
 print(graph.getEdgeList())
 
@@ -150,3 +182,5 @@ print(graph.getAdjacencyMatrix())
 print("\nIs the graph cyclic?")
 print(graph.IsCyclic(1))
                 
+print("\n Topological Sort")
+print(graph.topological_sort())
