@@ -38,6 +38,8 @@ Some of the data structures & algorithms I implemented in Python for practice
 
 -> Strongly Connected Components for a Directed Graph (Kosaraju's Algorithm)
 
+-> Topological Sorting
+
 # Problems
 
 -> 0-1 Knapsack
@@ -47,3 +49,9 @@ Some of the data structures & algorithms I implemented in Python for practice
 -> Detect Cycle in an Undirected Graph
 
 -> Letter Combinations of Phone Numbers
+
+-> Contains Duplicate III
+
+-> String to Integer(Atoi)
+
+-> Roman to Integer
