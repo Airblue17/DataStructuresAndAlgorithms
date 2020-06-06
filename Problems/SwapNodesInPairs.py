@@ -27,15 +27,21 @@ def swapPairs(head):
     while current:
         if current.next:
             if current is head:
+                # Assign the 2nd node as head
                 head = current.next
+                # Current = Old Head 
+                # So update its next to point to the 2nd Node Next 
                 current.next = head.next
+                # update New Head (2nd Node) next to point to the old head(current)
                 head.next = current
                 prev = current
+                # Go to the 3rd node
                 current = current.next
             else:
                 Next = current.next 
                 currentNode = current
                 swap(currentNode, Next)
+                # Update the pointer of the node thats just before the node that was swapped
                 prev.next = Next
                 prev = currentNode
                 current = currentNode.next
