@@ -55,3 +55,7 @@ Some of the data structures & algorithms I implemented in Python for practice
 -> String to Integer(Atoi)
 
 -> Roman to Integer
+
+-> Swap Linked List Nodes in Pairs
+
+-> Check if two binary trees are identical
