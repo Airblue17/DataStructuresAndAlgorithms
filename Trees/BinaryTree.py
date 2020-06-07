@@ -90,6 +90,42 @@ class BinaryTree(object):
         
         return '-'.join(traversal)
     
+    def inorderTraversal(self, root):
+
+        ret_list = []
+        if not root:
+            return []
+        
+        node_stack = [root]
+
+                
+        self._clearChildVisit(root)
+
+        current = root
+        
+        root.visited = False
+        
+        while node_stack:
+            if current.left and not current.left.visited:
+                current = current.left
+                node_stack.append(current)
+                self._clearChildVisit(current)
+            else:
+                if not current.visited:
+                    ret_list.append(current.value)
+                    current.visited = True
+                    
+                if current.right and not current.right.visited:
+                    current = current.right
+                    node_stack.append(current)
+                    self._clearChildVisit(current) 
+                else:
+                    node_stack.pop()
+                    if node_stack:
+                        current = node_stack[-1]
+                    
+        return ret_list
+    
     def preorder_search(self, start, findVal):
         if start:
             if start.value == findVal:
@@ -140,6 +176,7 @@ class BinaryTree(object):
                 nodes_queue.append(current.right)
                 ret_list.append(current.right.value)
             nodes_queue.pop(0)
+            
             if nodes_queue:
                 current = nodes_queue[0]
                 
@@ -180,6 +217,9 @@ print(tree.preorder_print(tree.root, traversal))
 traversal = []
 print("\nIn-order Traversal")
 print(tree.inorder_print(tree.root, traversal))
+
+print("\nIn-order Traversal (Iterative)")
+print(tree.inorderTraversal(tree.root))
 
 traversal = []
 print("\nPost-order Traversal")
