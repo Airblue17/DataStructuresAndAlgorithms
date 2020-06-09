@@ -90,6 +90,16 @@ class LinkedList(object):
         self.head.next = None
         self.head = newHead
         
+    def reverseR(self, previous, current):
+        
+        if current.next:
+            self.reverseR(current, current.next)
+        else:
+            self.newHead = current
+        current.next = previous
+            
+            
+        
             
             
         
