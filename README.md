@@ -59,3 +59,11 @@ Some of the data structures & algorithms I implemented in Python for practice
 -> Swap Linked List Nodes in Pairs
 
 -> Check if two binary trees are identical
+
+-> Check if a tree is a valid BST
+
+-> Delete Leaves with given target value
+
+-> Decoded String at Index
+
+-> Largest Number
