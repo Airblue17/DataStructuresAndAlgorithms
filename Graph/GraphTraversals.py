@@ -159,6 +159,7 @@ class Graph(object):
         return min_node
     
     def shortestPath(self, startNodeValue):
+        self._clearVisited()
         start = self.findStartNode(startNodeValue)
         dist, nodes_queue = self.dist_init(start)
         
@@ -166,7 +167,7 @@ class Graph(object):
             current = self.findMinDistNode(nodes_queue, dist)
             nodes_queue.remove(current)
             
-            out_edges = [e for e in current.edges if e.node_to.value != current.value and e not in nodes_queue]
+            out_edges = [e for e in current.edges if e.node_to.value != current.value]
             
             for edge in out_edges:
                 alt_dist = dist[current.value] + edge.value
