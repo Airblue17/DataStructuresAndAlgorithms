@@ -67,3 +67,11 @@ Some of the data structures & algorithms I implemented in Python for practice
 -> Decoded String at Index
 
 -> Largest Number
+
+-> Check if there exists duplicate subtree in a binary tree
+
+-> merge two binary trees
+
+-> Longest univalue path
+
+-> Check if a binary tree is balanced
