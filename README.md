@@ -75,3 +75,11 @@ Some of the data structures & algorithms I implemented in Python for practice
 -> Longest univalue path
 
 -> Check if a binary tree is balanced
+
+-> Lowest Common Ancestor
+
+-> Sorted Array to BST 
+
+-> BST to Greater Tree
+
+-> Minimum difference between nodes in a BST
