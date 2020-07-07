@@ -83,3 +83,19 @@ Some of the data structures & algorithms I implemented in Python for practice
 -> BST to Greater Tree
 
 -> Minimum difference between nodes in a BST
+
+-> Merge Two Sorted Lists
+
+-> Isomorphic Strings
+
+-> Path in A ZigZag Tree
+
+-> Width Of a Binary Tree
+
+-> Serialize and Deserialize BST
+
+-> Twitter Design
+
+-> Kth Largest Element
+
+-> Non Decreasing Array
