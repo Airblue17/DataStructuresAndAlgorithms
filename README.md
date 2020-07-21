@@ -18,6 +18,8 @@ Some of the data structures & algorithms I implemented in Python for practice
 
 -> Graph
 
+-> Trie
+
 # Algorithms
 
 -> Binary Search
